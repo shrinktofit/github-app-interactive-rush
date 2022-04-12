@@ -1,9 +1,9 @@
-import { Probot } from "probot";
+import { ApplicationFunctionOptions, Probot } from "probot";
 import dedent from 'dedent';
 import * as rush from '@microsoft/rush-lib';
 import { Terminal, ConsoleTerminalProvider } from '@rushstack/node-core-library';
 
-export = (app: Probot) => {
+export default (app: Probot, _options: ApplicationFunctionOptions) => {
     app.on("issues.opened", async (context) => {
         const issueComment = context.issue({
             body: "Thanks for opening this issue!",

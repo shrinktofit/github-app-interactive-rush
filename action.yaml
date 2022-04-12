@@ -1,0 +1,7 @@
+name: 'Interactive rush.js'
+description: 'Interactive rush.js integration'
+runs:
+  using: "composite"
+  steps:
+    - run: npm install; node ./lib/github-action.js
+      shell: pwsh
