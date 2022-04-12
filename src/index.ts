@@ -1,9 +1,11 @@
-import { ApplicationFunctionOptions, Probot } from "probot";
+import { Probot } from "probot";
 import dedent from 'dedent';
 import * as rush from '@microsoft/rush-lib';
 import { Terminal, ConsoleTerminalProvider } from '@rushstack/node-core-library';
 
-export default (app: Probot, _options: ApplicationFunctionOptions) => {
+export default (options: {
+  repo: string;
+}) => (app: Probot) => {
     app.on("issues.opened", async (context) => {
         const issueComment = context.issue({
             body: "Thanks for opening this issue!",
@@ -20,7 +22,7 @@ export default (app: Probot, _options: ApplicationFunctionOptions) => {
 
     app.on('pull_request.opened', async (context) => {
       console.log(`PullRequest opened`);
-      const rushConfiguration = loadRushConfiguration();
+      const rushConfiguration = loadRushConfiguration(options.repo);
       const projectChangeAnalyzer = new rush.ProjectChangeAnalyzer(rushConfiguration);
       const terminal = createRushTerminal();
       const targetBranchName = context.payload.pull_request.base.ref;
@@ -56,8 +58,9 @@ function createRushTerminal(): rush.IGetChangedProjectsOptions['terminal'] {
   return terminal;
 }
 
-function loadRushConfiguration(): rush.RushConfiguration {
+function loadRushConfiguration(repo: string): rush.RushConfiguration {
   return rush.RushConfiguration.loadFromDefaultLocation({
-    startingFolder: String.raw`X:\Dev\Repos\Cocos\eslint-config`,
+    startingFolder: repo,
+    showVerbose: true,
   });
 }
