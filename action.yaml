@@ -7,6 +7,7 @@ runs:
       with:
         path: '__repo'
         ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: 0
     - run: |
         git fetch --depth=1 origin ${{ github.event.pull_request.base.sha }}
         git branch -f ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.base.sha }}
