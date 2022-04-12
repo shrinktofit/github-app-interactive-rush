@@ -19,6 +19,7 @@ export default (app: Probot, _options: ApplicationFunctionOptions) => {
     // https://probot.github.io/docs/development/
 
     app.on('pull_request.opened', async (context) => {
+      console.log(`PullRequest opened`);
       const rushConfiguration = loadRushConfiguration();
       const projectChangeAnalyzer = new rush.ProjectChangeAnalyzer(rushConfiguration);
       const terminal = createRushTerminal();
