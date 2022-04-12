@@ -21,7 +21,10 @@ export default (options: {
     // https://probot.github.io/docs/development/
 
     app.on('pull_request.opened', async (context) => {
-      console.log(`PullRequest opened`);
+      console.log(dedent`PullRequest opened:
+      Author: ${context.payload.pull_request.user.login}
+      TargetBranchName: ${context.payload.pull_request.base.ref}
+      `);
       const rushConfiguration = loadRushConfiguration(options.repo);
       const projectChangeAnalyzer = new rush.ProjectChangeAnalyzer(rushConfiguration);
       const terminal = createRushTerminal();
