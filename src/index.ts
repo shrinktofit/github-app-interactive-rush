@@ -45,11 +45,11 @@ export default (options: {
       const projectArray = Array.from(projects).sort((a, b) => a.packageName.localeCompare(b.packageName));
       const comment = context.issue({
         body: dedent`
-        Hiya ${context.payload.pull_request.user.login}, I've seen you changed some packages. If you'd like to publish new versions, Please fill the necessary survey.
+        Hiya @${context.payload.pull_request.user.login}, I've seen you changed some packages. If you'd like to publish new versions, Please fill the necessary survey(by editing this commit): 
         | Package name | Bump type(patch, minor, major) | Changelog |
         | -- | -- | -- |
         ${projectArray.map((project) => {
-          return `| ${project.packageName} | patch |  |`;
+          return `| *${project.packageName}* | patch |  |`;
         }).join('\n')}
         `,
       });
