@@ -6,6 +6,7 @@ runs:
     - uses: actions/checkout@v3
       with:
         path: '__repo'
+        ref: ${{ github.event.pull_request.head.sha }}
     - run: npm install; node ./lib/github-action.js
       shell: pwsh
       working-directory: ${{ github.action_path }}

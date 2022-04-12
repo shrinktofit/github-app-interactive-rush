@@ -25,6 +25,7 @@ export default (options: {
       Author: ${context.payload.pull_request.user.login}
       TargetBranchName: ${context.payload.pull_request.base.ref}
       `);
+
       const rushConfiguration = loadRushConfiguration(options.repo);
       const projectChangeAnalyzer = new rush.ProjectChangeAnalyzer(rushConfiguration);
       const terminal = createRushTerminal();
@@ -37,8 +38,10 @@ export default (options: {
         enableFiltering: true,
       });
       if (projects.size === 0) {
+        console.log(`This PR does not change to packages.`);
         return;
       }
+
       const projectArray = Array.from(projects).sort((a, b) => a.packageName.localeCompare(b.packageName));
       const comment = context.issue({
         body: dedent`
