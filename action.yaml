@@ -5,3 +5,4 @@ runs:
   steps:
     - run: npm install; node ./lib/github-action.js
       shell: pwsh
+      working-directory: ${{ github.action_path }}
