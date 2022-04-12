@@ -1,0 +1,22 @@
+{
+    "action": "opened",
+    "pull_request": {
+      "number": 1,
+      "user": {
+        "login": "Meow"
+      },
+      "base": {
+        "ref": "master"
+      }
+    },
+    "repository": {
+      "name": "testing-things",
+      "owner": {
+        "login": "hiimbex"
+      }
+    },
+    "installation": {
+      "id": 2
+    }
+  }
+  
