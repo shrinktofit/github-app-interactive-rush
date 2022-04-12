@@ -7,6 +7,11 @@ runs:
       with:
         path: '__repo'
         ref: ${{ github.event.pull_request.head.sha }}
+    - run: |
+        git branch -f ${{ github.event.pull_request.base.ref }} ${{ github.event.pull_request.base.sha }}
+        git branch -f ${{ github.event.pull_request.head.ref }} ${{ github.event.pull_request.head.sha }}
+        git checkout ${{ github.event.pull_request.head.ref }}
+      shell: pwsh
     - run: npm install; node ./lib/github-action.js
       shell: pwsh
       working-directory: ${{ github.action_path }}

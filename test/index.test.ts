@@ -32,7 +32,9 @@ describe("My Probot app", () => {
             }),
         });
         // Load our app into probot
-        probot.load(myProbotApp);
+        probot.load(myProbotApp({
+            repo: String.raw`X:\Dev\Repos\Cocos\eslint-config`,
+        }));
     });
 
     test("creates a comment when an issue is opened", async (done) => {
